@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.myapplication"
+    namespace = "com.lexleontiev.preferences_data_store_example"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.myapplication"
+        applicationId = "com.lexleontiev.preferences_data_store_example"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
@@ -39,7 +39,7 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures {
-        compose = true
+        compose = false
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.14"
@@ -52,31 +52,13 @@ android {
 }
 
 dependencies {
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.lifecycle.viewmodel.savedstate)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    implementation(libs.compose.livedata)
-    implementation(libs.appcompat)
     implementation(libs.androidx.fragment)
-    implementation(libs.androidx.fragment.ktx)
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
     implementation(libs.preference.ktx)
     implementation(libs.datastore)
     implementation(libs.material)
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
 }

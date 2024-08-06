@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.lexleontiev.preferences_data_store_example.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.lexleontiev.preferences_data_store_example.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -30,7 +31,7 @@ class ObservePreferencesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val textView = view.findViewById<TextView>(R.id.user_preferences_text)
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { uiState ->
                     textView.text = uiState.toString()

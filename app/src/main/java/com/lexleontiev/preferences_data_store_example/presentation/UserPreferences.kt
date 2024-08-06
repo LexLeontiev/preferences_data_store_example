@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.lexleontiev.preferences_data_store_example.presentation
 
 data class UserPreferences(
     val booleanPref: Boolean,

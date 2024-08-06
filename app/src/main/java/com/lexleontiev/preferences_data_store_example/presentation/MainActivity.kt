@@ -1,7 +1,8 @@
-package com.example.myapplication
+package com.lexleontiev.preferences_data_store_example.presentation
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
+import com.lexleontiev.preferences_data_store_example.R
 import dagger.hilt.android.AndroidEntryPoint
 
 

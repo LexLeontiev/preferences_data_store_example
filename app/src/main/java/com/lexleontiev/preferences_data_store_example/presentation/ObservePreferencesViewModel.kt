@@ -1,7 +1,8 @@
-package com.example.myapplication
+package com.lexleontiev.preferences_data_store_example.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.lexleontiev.preferences_data_store_example.data.UserPreferencesRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -25,8 +26,4 @@ class ObservePreferencesViewModel @Inject constructor(
                 }
         }
     }
-
-    /*
-    минусы: нет типов Double и еще какого-то у SharedPrefs в отличие от DataStore
-     */
 }

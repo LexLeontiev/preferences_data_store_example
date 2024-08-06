@@ -1,14 +1,16 @@
-package com.example.myapplication
+package com.lexleontiev.preferences_data_store_example.presentation
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
+import androidx.preference.MultiSelectListPreference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
+import com.lexleontiev.preferences_data_store_example.data.PreferenceKey
+import com.lexleontiev.preferences_data_store_example.data.UserPreferencesDataStore
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -145,20 +147,14 @@ class UserPreferencesFragment : PreferenceFragmentCompat() {
             isIconSpaceReserved = false
         }
         screen.addPreference(stringSetSection)
-        val stringSetDefault = setOf("set1str1", "set1str2")
-        val stringSetData = mapOf(
-            "String Set 1" to stringSetDefault,
-            "String Set 2" to setOf("set2str1", "set2str2"),
-            "String Set 3" to setOf("set3str1", "set3str2")
-        )
         stringSetSection.addPreference(
-            StringSetListPreference(context).apply {
+            MultiSelectListPreference(context).apply {
                 key = PreferenceKey.KEY_STRING_SET_PREFERENCE
                 title = "Select string set"
                 dialogTitle = "Select string set"
-                entries = stringSetData.keys.toTypedArray()
-                setTypedValues(stringSetData.values, stringSetDefault)
-                summaryProvider = ListPreference.SimpleSummaryProvider.getInstance()
+                entries = stringData.keys.toTypedArray()
+                entryValues = stringData.values.toTypedArray()
+                setDefaultValue(emptySet<String>())
                 isIconSpaceReserved = false
             }
         )

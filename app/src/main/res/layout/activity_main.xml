@@ -6,10 +6,9 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/set_preferences_fragment"
-        android:name="com.example.myapplication.UserPreferencesFragment"
+        android:name="com.lexleontiev.preferences_data_store_example.presentation.UserPreferencesFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/material_dynamic_neutral_variant95"
         app:layout_constraintBottom_toTopOf="@id/observe_preferences_fragment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,10 +16,10 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/observe_preferences_fragment"
-        android:name="com.example.myapplication.ObservePreferencesFragment"
+        android:name="com.lexleontiev.preferences_data_store_example.presentation.ObservePreferencesFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/material_dynamic_neutral_variant40"
+        android:background="@color/cardview_dark_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.lexleontiev.preferences_data_store_example.data
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -32,7 +32,7 @@ class UserPreferencesDataStore(
         }
     }
 
-    override fun putStringSet(key: String?, values: MutableSet<String>?) {
+    override fun putStringSet(key: String?, values: Set<String>?) {
         if (key != null) {
             coroutineScope.launch {
                 dataStore.edit { preferences ->
@@ -83,53 +83,27 @@ class UserPreferencesDataStore(
         }
     }
 
-    override fun getString(key: String?, defValue: String?): String? {
-        return key
-            ?.let {
-                runBlocking { dataStore.data.first()[stringPreferencesKey(it)] ?: defValue }
-            }
-            ?: defValue
-    }
+    override fun getString(key: String?, defValue: String?): String? = key?.let {
+        runBlocking { dataStore.data.first()[stringPreferencesKey(it)] ?: defValue }
+    } ?: defValue
 
-    override fun getStringSet(key: String?, defValues: MutableSet<String>?): MutableSet<String>? {
-        return key
-            ?.let {
-                runBlocking { dataStore.data.first()[stringSetPreferencesKey(it)]?.toMutableSet() ?: defValues }
-            }
-            ?: defValues
-    }
+    override fun getStringSet(key: String?, defValues: Set<String>?): Set<String>? = key?.let {
+        runBlocking { dataStore.data.first()[stringSetPreferencesKey(it)] }
+    } ?: defValues
 
-    override fun getInt(key: String?, defValue: Int): Int {
-        return key
-            ?.let {
-                runBlocking {
-                    dataStore.data.first()[intPreferencesKey(it)] ?: defValue
-                }
-            }
-            ?: defValue
-    }
+    override fun getInt(key: String?, defValue: Int): Int = key?.let {
+        runBlocking { dataStore.data.first()[intPreferencesKey(it)] }
+    } ?: defValue
 
-    override fun getLong(key: String?, defValue: Long): Long {
-        return key
-            ?.let {
-                runBlocking { dataStore.data.first()[longPreferencesKey(it)] ?: defValue }
-            }
-            ?: defValue
-    }
+    override fun getLong(key: String?, defValue: Long): Long = key?.let {
+        runBlocking { dataStore.data.first()[longPreferencesKey(it)] }
+    } ?: defValue
 
-    override fun getFloat(key: String?, defValue: Float): Float {
-        return key
-            ?.let {
-                runBlocking { dataStore.data.first()[floatPreferencesKey(it)] ?: defValue }
-            }
-            ?: defValue
-    }
+    override fun getFloat(key: String?, defValue: Float): Float = key?.let {
+        runBlocking { dataStore.data.first()[floatPreferencesKey(it)] }
+    } ?: defValue
 
-    override fun getBoolean(key: String?, defValue: Boolean): Boolean {
-        return key
-            ?.let {
-                runBlocking { dataStore.data.first()[booleanPreferencesKey(it)] ?: defValue }
-            }
-            ?: defValue
-    }
+    override fun getBoolean(key: String?, defValue: Boolean): Boolean = key?.let {
+        runBlocking { dataStore.data.first()[booleanPreferencesKey(it)] }
+    } ?: defValue
 }

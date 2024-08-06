@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.lexleontiev.preferences_data_store_example.data
 
 object PreferenceKey {
     const val KEY_BOOLEAN_SECTION = "key_boolean_section"

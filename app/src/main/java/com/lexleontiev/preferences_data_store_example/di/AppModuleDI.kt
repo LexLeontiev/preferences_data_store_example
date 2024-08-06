@@ -1,9 +1,10 @@
-package com.example.myapplication
+package com.lexleontiev.preferences_data_store_example.di
 
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import com.lexleontiev.preferences_data_store_example.data.UserPreferencesRepo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
