@@ -1,33 +1,24 @@
 package com.lexleontiev.preferences_data_store_example.presentation
 
 import android.os.Bundle
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.lifecycle.lifecycleScope
 import androidx.preference.ListPreference
 import androidx.preference.MultiSelectListPreference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.lexleontiev.preferences_data_store_example.data.PreferenceKey
-import com.lexleontiev.preferences_data_store_example.data.UserPreferencesDataStore
+import com.lexleontiev.preferences_data_store_example.data.UserPreferencesRepo.Companion.PREFS_NAME
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class UserPreferencesFragment : PreferenceFragmentCompat() {
 
-    @Inject lateinit var dataStore: DataStore<Preferences>
-
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+
+        preferenceManager.sharedPreferencesName = PREFS_NAME
         val context = preferenceManager.context
         val screen = preferenceManager.createPreferenceScreen(context)
-
-        preferenceManager.preferenceDataStore = UserPreferencesDataStore(
-            dataStore = dataStore,
-            coroutineScope = lifecycleScope
-        )
 
         // BOOLEAN
         val booleanSection = PreferenceCategory(context).apply {
@@ -57,12 +48,13 @@ class UserPreferencesFragment : PreferenceFragmentCompat() {
             "3" to 3,
         )
         intSection.addPreference(
-            IntListPreference(context).apply {
+            ListPreference(context).apply {
                 key = PreferenceKey.KEY_INT_PREFERENCE
                 title = "Select integer"
                 dialogTitle = "Select integer"
                 entries = intData.keys.toTypedArray()
-                setTypedValues(intData.values, intDefault)
+                entryValues = intData.values.map(Int::toString).toTypedArray()
+                setDefaultValue(intDefault.toString())
                 summaryProvider = ListPreference.SimpleSummaryProvider.getInstance()
                 isIconSpaceReserved = false
             }
@@ -81,12 +73,13 @@ class UserPreferencesFragment : PreferenceFragmentCompat() {
             "3 quadrillions" to 3_000_000_000_000_000L,
         )
         longSection.addPreference(
-            LongListPreference(context).apply {
+            ListPreference(context).apply {
                 key = PreferenceKey.KEY_LONG_PREFERENCE
                 title = "Select long"
                 dialogTitle = "Select long"
                 entries = longData.keys.toTypedArray()
-                setTypedValues(longData.values, longDefault)
+                entryValues = longData.values.map(Long::toString).toTypedArray()
+                setDefaultValue(longDefault.toString())
                 summaryProvider = ListPreference.SimpleSummaryProvider.getInstance()
                 isIconSpaceReserved = false
             }
@@ -105,12 +98,13 @@ class UserPreferencesFragment : PreferenceFragmentCompat() {
             "-12.8954" to -12.8954f,
         )
         floatSection.addPreference(
-            FloatListPreference(context).apply {
+            ListPreference(context).apply {
                 key = PreferenceKey.KEY_FLOAT_PREFERENCE
                 title = "Select float"
                 dialogTitle = "Select float"
                 entries = floatData.keys.toTypedArray()
-                setTypedValues(floatData.values, floatDefault)
+                entryValues = floatData.values.map(Float::toString).toTypedArray()
+                setDefaultValue(floatDefault.toString())
                 summaryProvider = ListPreference.SimpleSummaryProvider.getInstance()
                 isIconSpaceReserved = false
             }

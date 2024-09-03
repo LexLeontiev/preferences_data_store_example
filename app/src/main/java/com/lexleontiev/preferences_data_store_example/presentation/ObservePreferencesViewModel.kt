@@ -4,8 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lexleontiev.preferences_data_store_example.data.UserPreferencesRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,6 +23,7 @@ class ObservePreferencesViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             userPreferencesRepo.userPreferencesFlow
+                .buffer(Channel.UNLIMITED)
                 .collect { userPreferences ->
                     _uiState.value = userPreferences
                 }

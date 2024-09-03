@@ -1,10 +1,9 @@
 package com.lexleontiev.preferences_data_store_example.di
 
 import android.content.Context
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
+import android.content.SharedPreferences
 import com.lexleontiev.preferences_data_store_example.data.UserPreferencesRepo
+import com.lexleontiev.preferences_data_store_example.data.UserPreferencesRepo.Companion.PREFS_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,17 +16,15 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModuleDI {
 
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "user_preferences")
-
     @Provides
     @Singleton
-    fun providePreferencesDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
-        return context.dataStore
+    fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences {
+        return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     }
 
     @Provides
     @Singleton
-    fun provideUserPreferencesRepo(dataStore: DataStore<Preferences>): UserPreferencesRepo {
-        return UserPreferencesRepo(dataStore)
+    fun provideUserPreferencesRepo(sharedPreferences: SharedPreferences): UserPreferencesRepo {
+        return UserPreferencesRepo(sharedPreferences)
     }
 }
